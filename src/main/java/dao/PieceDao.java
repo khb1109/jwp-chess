@@ -3,6 +3,7 @@ package dao;
 import chess.location.Location;
 import chess.piece.type.Piece;
 import db.DBConnection;
+import org.springframework.dao.DataAccessException;
 import vo.PieceVo;
 
 import java.sql.Connection;
@@ -10,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PieceDao {
@@ -65,8 +67,8 @@ public class PieceDao {
         piece.toString();
         piece.getName();
         String.valueOf(piece.getName());
-        try (Connection connection = DBConnection.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
+        try(Connection connection = DBConnection.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(query)){
             pstmt.setString(1, String.valueOf(destination.getRowValue()));
             pstmt.setString(2, String.valueOf(destination.getColValue()));
             pstmt.setString(3, String.valueOf(piece.getName()));

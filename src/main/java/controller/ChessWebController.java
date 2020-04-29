@@ -9,7 +9,9 @@ import spark.template.handlebars.HandlebarsTemplateEngine;
 import java.util.HashMap;
 import java.util.Map;
 
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.post;
+import static spark.Spark.staticFiles;
 
 public class ChessWebController {
     private static final HandlebarsTemplateEngine handlebarsTemplateEngine = new HandlebarsTemplateEngine();
@@ -20,10 +22,6 @@ public class ChessWebController {
     public ChessWebController(ChessService chessService) {
         this.chessService = chessService;
         this.run();
-    }
-
-    private static String render(Map<String, Object> model, String templatePath) {
-        return handlebarsTemplateEngine.render(new ModelAndView(model, templatePath));
     }
 
     private void run() {
@@ -72,5 +70,9 @@ public class ChessWebController {
             chessService.resetChessGame(chessGame, gameId);
             return chessService.findBoard(gameId);
         });
+    }
+
+    private static String render(Map<String, Object> model, String templatePath) {
+        return handlebarsTemplateEngine.render(new ModelAndView(model, templatePath));
     }
 }

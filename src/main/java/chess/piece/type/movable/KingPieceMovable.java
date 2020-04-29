@@ -2,6 +2,9 @@ package chess.piece.type.movable;
 
 import chess.board.Route;
 import chess.location.Location;
+import chess.piece.type.Piece;
+
+import java.util.Map;
 
 import static java.lang.Math.abs;
 
